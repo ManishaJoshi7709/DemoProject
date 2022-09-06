@@ -3,11 +3,18 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "ng lint && stylelint \"**/*.{css,scss,sass}\" && ng serve --open",
+    "start:mem": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng serve --open",
+    "build": "ng lint && stylelint \"**/*.{css,scss,sass}\" && ng build",
+    "build:prod": "ng lint && stylelint \"**/*.{css,scss,sass}\" && ng build --prod",
+    "build:prod:mem": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build:android": "npm run build:prod && cordova build android --release",
+    "build:test:android": "npm run build:prod && cordova build android",
+    "build:ios": "npm run build:prod && cordova build ios --release",
+    "bundle-report": "webpack-bundle-analyzer dist/stats.json"
   },
   "private": true,
   "dependencies": {
